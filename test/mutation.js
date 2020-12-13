@@ -5,7 +5,7 @@ chai.use(spies);
 // assertion style included with chai
 const { expect } = chai;
 
-const mutate = require("../problems/mutation");
+const {mutatingMap, myMap, originalMap} = require("../problems/mutation");
 
 
 function myCustomSpyOn(arr){
@@ -46,10 +46,14 @@ describe("setting up a proxy", () => {
     const arr = ["one", "two", "three"];
 
     const spy = myCustomSpyOn(arr)
-    mutate(spy, (str) => str.toUpperCase());
+    // mutatingMap(spy, (str) => str.toUpperCase());
+    // myMap(spy, (str) => str.toUpperCase());
+    // originalMap(spy, (str) => str.toUpperCase());
     
     const {mutations, didNotMutate} = detectMutationHandler
+    console.log(didNotMutate ? 'yippee skippee, no mutatins!!!!' : `your original array: [${arr.join(', ')}] has been mutated ${mutations} times`)
     expect(didNotMutate).to.be.true
     expect(mutations).to.equal(0)
   });
+  
 });
